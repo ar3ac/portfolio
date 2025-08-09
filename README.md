@@ -1,7 +1,5 @@
 # Portfolio – Luca Marrazzo
 
-![Portfolio Screenshot](assets/portfolio_preview.png)
-
 ## 🔗 Link diretto
 ➡️ **[Visita la landing page portfolio](https://ar3ac.github.io/portfolio)**
 
@@ -28,24 +26,10 @@ L'obiettivo è mostrare il mio percorso di crescita come **Python Developer**, c
 
 ---
 
-## 📦 Installazione locale
-Se vuoi visualizzare o modificare la pagina in locale:
-```bash
-# Clona il repository
-git clone https://github.com/ar3ac/portfolio.git
-
-# Entra nella cartella
-cd portfolio
-
-# Apri il file index.html nel browser
-```
-
----
 
 ## 📬 Contatti
 - **Email:** luca.marrazzo@gmail.com  
 - **GitHub:** [github.com/ar3ac](https://github.com/ar3ac)  
-- **LinkedIn:** *(opzionale, inserisci se vuoi)*
 
 ---
 
