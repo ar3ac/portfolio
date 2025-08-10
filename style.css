@@ -1,104 +1,245 @@
-/* ====== FIX LAYOUT DESKTOP ====== */
-
-/* Contenitore centrale */
-main {
-    max-width: 1100px;
-    /* limita la larghezza su desktop */
-    margin: 0 auto;
-    /* centra il contenuto */
-    padding: 0 16px;
-    /* respiro ai lati */
+/* =========
+   Base setup
+   ========= */
+*,
+*::before,
+*::after {
     box-sizing: border-box;
 }
 
-/* Griglia progetti responsiva */
-.projects {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    /* 1-3 colonne */
-    gap: 20px;
-    align-items: stretch;
+:root {
+    --bg: #f7f7f8;
+    --card: #ffffff;
+    --text: #111213;
+    --muted: #5f6368;
+    --border: #e6e7ea;
+    --accent: #0d6efd;
+    --shadow: 0 6px 16px rgba(0, 0, 0, .06);
 }
 
-/* Card progetto */
-.project.card {
-    display: flex;
-    flex-direction: column;
-    border-radius: 14px;
-    padding: 18px;
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
-    background: #fff;
-    /* assicura sfondo pieno */
-    border: 1px solid rgba(0, 0, 0, 0.06);
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: #0f1115;
+        --card: #141821;
+        --text: #e9ecf1;
+        --muted: #a4a9b3;
+        --border: #232837;
+        --shadow: 0 8px 22px rgba(0, 0, 0, .35);
+    }
 }
 
-/* Contenuto card */
-.project-info {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+html,
+body {
+    margin: 0;
+    padding: 0;
 }
 
-/* Titolo progetto */
-.project-info h3 {
-    margin: 0 0 6px 0;
-    line-height: 1.2;
-    font-size: 1.15rem;
-    /* evita titoli giganti su desktop */
-    word-break: break-word;
+body {
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
-/* Link */
-.project-links a {
-    display: inline-block;
-    text-decoration: none;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    padding: 8px 12px;
-    border-radius: 10px;
-    transition: transform .08s ease, box-shadow .2s ease, border-color .2s ease;
+/* =========
+   Layout
+   ========= */
+header,
+main,
+footer {
+    width: 100%;
 }
 
-.project-links a:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-    border-color: rgba(0, 0, 0, 0.25);
+header,
+footer {
+    padding: 24px 16px;
 }
 
-/* Header un filo più contenuto su desktop larghi */
 header {
-    max-width: 1100px;
-    margin: 24px auto 8px;
-    padding: 0 16px;
     text-align: center;
 }
 
-/* Se avevi card “full width” forzate, neutralizza */
-.project,
-.card {
-    width: auto;
-    /* evita width:100% fissi che sballano la griglia */
-    max-width: none;
+main {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 8px 16px 32px;
 }
 
-/* Ritocchi per desktop grande */
-@media (min-width: 1200px) {
-    .projects {
-        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-        gap: 24px;
-    }
+section {
+    margin: 28px 0;
+}
 
-    .project-info h3 {
-        font-size: 1.2rem;
+/* =========
+   Typography
+   ========= */
+h1,
+h2,
+h3 {
+    margin: 0 0 .4em 0;
+    line-height: 1.2;
+    font-weight: 700;
+    letter-spacing: -.02em;
+}
+
+h1 {
+    font-size: clamp(1.8rem, 2.8vw, 2.2rem);
+}
+
+h2 {
+    font-size: clamp(1.2rem, 2vw, 1.4rem);
+    color: var(--muted);
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.05rem;
+}
+
+p {
+    margin: 0 0 .8em 0;
+    color: var(--text);
+}
+
+small {
+    color: var(--muted);
+}
+
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    background: rgba(127, 127, 127, .08);
+    border: 1px solid var(--border);
+    padding: .08em .4em;
+    border-radius: 6px;
+}
+
+/* =========
+   Header
+   ========= */
+header h1 {
+    margin-bottom: .1em;
+}
+
+header h3 {
+    margin-top: .1em;
+    color: var(--muted);
+    font-weight: 500;
+}
+
+header p {
+    color: var(--muted);
+}
+
+/* =========
+   Projects grid & cards
+   ========= */
+.projects {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: stretch;
+}
+
+@media (min-width: 680px) {
+    .projects {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
     }
 }
 
-/* Ritocchi per mobile piccolo */
-@media (max-width: 400px) {
+@media (min-width: 980px) {
     .projects {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 20px;
     }
+}
 
-    .project-info h3 {
-        font-size: 1.05rem;
+.project.card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px 16px 14px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    transition: transform .08s ease-out, box-shadow .18s ease-out, border-color .18s ease-out;
+}
+
+.project.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, .10);
+    border-color: color-mix(in oklab, var(--border), var(--accent) 18%);
+}
+
+.project-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.project-info h3 {
+    margin-bottom: 2px;
+    font-weight: 650;
+}
+
+.project-links {
+    margin-top: 6px;
+}
+
+.project-links a {
+    display: inline-block;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: background .15s ease, border-color .15s ease, transform .08s ease;
+}
+
+.project-links a:hover {
+    background: color-mix(in oklab, var(--card), var(--accent) 7%);
+    border-color: color-mix(in oklab, var(--border), var(--accent) 28%);
+    transform: translateY(-1px);
+}
+
+/* =========
+   Contact
+   ========= */
+.contact ul {
+    list-style: none;
+    padding: 0;
+    margin: 8px 0 0 0;
+}
+
+.contact li {
+    margin: 6px 0;
+    color: var(--text);
+}
+
+.contact a {
+    color: var(--accent);
+    text-decoration: none;
+    border-bottom: 1px dashed color-mix(in oklab, var(--accent), var(--card) 70%);
+}
+
+.contact a:hover {
+    border-bottom-style: solid;
+}
+
+/* =========
+   Footer
+   ========= */
+footer {
+    text-align: center;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+}
+
+/* =========
+   Motion preferences
+   ========= */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        transition: none !important;
     }
 }
