@@ -1,6 +1,4 @@
-/* =========
-   Base setup
-   ========= */
+/* ===== Base ===== */
 *,
 *::before,
 *::after {
@@ -8,23 +6,24 @@
 }
 
 :root {
-    --bg: #f7f7f8;
+    --bg: #f7f7fb;
     --card: #ffffff;
-    --text: #111213;
-    --muted: #5f6368;
-    --border: #e6e7ea;
-    --accent: #0d6efd;
-    --shadow: 0 6px 16px rgba(0, 0, 0, .06);
+    --text: #0f1222;
+    --muted: #6b7280;
+    --border: #e7e9f0;
+    --accent: #2563eb;
+    /* blu professionale */
+    --shadow: 0 8px 24px rgba(15, 18, 34, .06);
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --bg: #0f1115;
-        --card: #141821;
-        --text: #e9ecf1;
-        --muted: #a4a9b3;
-        --border: #232837;
-        --shadow: 0 8px 22px rgba(0, 0, 0, .35);
+        --bg: #0e1117;
+        --card: #121620;
+        --text: #e8ebf2;
+        --muted: #a2a9b6;
+        --border: #1f2533;
+        --shadow: 0 10px 28px rgba(0, 0, 0, .45);
     }
 }
 
@@ -37,14 +36,12 @@ body {
 body {
     background: var(--bg);
     color: var(--text);
-    font: 16px/1.55 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    font: 16px/1.6 "Inter", system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
 }
 
-/* =========
-   Layout
-   ========= */
+/* ===== Layout ===== */
 header,
 main,
 footer {
@@ -53,7 +50,7 @@ footer {
 
 header,
 footer {
-    padding: 24px 16px;
+    padding: 28px 16px;
 }
 
 header {
@@ -61,159 +58,163 @@ header {
 }
 
 main {
-    max-width: 980px;
+    max-width: 880px;
     margin: 0 auto;
-    padding: 8px 16px 32px;
+    padding: 8px 16px 40px;
 }
 
 section {
     margin: 28px 0;
 }
 
-/* =========
-   Typography
-   ========= */
+/* ===== Typography ===== */
 h1,
 h2,
 h3 {
-    margin: 0 0 .4em 0;
+    margin: 0 0 .5em 0;
     line-height: 1.2;
-    font-weight: 700;
-    letter-spacing: -.02em;
+    letter-spacing: -0.01em;
 }
 
 h1 {
-    font-size: clamp(1.8rem, 2.8vw, 2.2rem);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 3vw, 2.3rem);
 }
 
 h2 {
-    font-size: clamp(1.2rem, 2vw, 1.4rem);
-    color: var(--muted);
     font-weight: 600;
+    font-size: clamp(1.15rem, 2vw, 1.35rem);
+    color: var(--muted);
 }
 
 h3 {
+    font-weight: 700;
     font-size: 1.05rem;
 }
 
-p {
-    margin: 0 0 .8em 0;
-    color: var(--text);
-}
-
-small {
-    color: var(--muted);
-}
-
-code {
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-    background: rgba(127, 127, 127, .08);
-    border: 1px solid var(--border);
-    padding: .08em .4em;
-    border-radius: 6px;
-}
-
-/* =========
-   Header
-   ========= */
-header h1 {
-    margin-bottom: .1em;
-}
-
 header h3 {
-    margin-top: .1em;
     color: var(--muted);
-    font-weight: 500;
+    font-weight: 600;
+    margin-top: .25em;
 }
 
 header p {
     color: var(--muted);
+    margin-top: .25em;
 }
 
-/* =========
-   Projects grid & cards
-   ========= */
+p {
+    margin: 0 0 .9em 0;
+}
+
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    background: rgba(127, 127, 127, .08);
+    border: 1px solid var(--border);
+    padding: .08em .45em;
+    border-radius: 6px;
+}
+
+/* ===== Projects: LIST view (no grid) ===== */
 .projects {
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 16px;
+    /* spaziatura tra card */
     align-items: stretch;
 }
 
-@media (min-width: 680px) {
-    .projects {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 18px;
-    }
-}
-
-@media (min-width: 980px) {
-    .projects {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 20px;
-    }
-}
-
+/* Card base */
 .project.card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 14px;
-    padding: 16px 16px 14px;
+    border-radius: 16px;
     box-shadow: var(--shadow);
+    padding: 18px 18px 16px;
     display: flex;
-    flex-direction: column;
     transition: transform .08s ease-out, box-shadow .18s ease-out, border-color .18s ease-out;
 }
 
 .project.card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 26px rgba(0, 0, 0, .10);
-    border-color: color-mix(in oklab, var(--border), var(--accent) 18%);
+    box-shadow: 0 12px 30px rgba(15, 18, 34, .1);
+    border-color: color-mix(in oklab, var(--border), var(--accent) 20%);
 }
 
+/* Contenuto card */
 .project-info {
     display: flex;
     flex-direction: column;
-    gap: 6px;
+    gap: 8px;
 }
 
 .project-info h3 {
     margin-bottom: 2px;
-    font-weight: 650;
+    line-height: 1.15;
 }
 
+/* Testo secondario più neutro (utile per recruiter) */
+.project-info p+p {
+    color: var(--muted);
+}
+
+/* Link/CTA */
 .project-links {
     margin-top: 6px;
 }
 
 .project-links a {
     display: inline-block;
+    text-decoration: none;
+    color: var(--accent);
+    font-weight: 600;
+    border: 1px solid color-mix(in oklab, var(--accent), var(--card) 70%);
     padding: 8px 12px;
     border-radius: 10px;
-    border: 1px solid var(--border);
-    text-decoration: none;
-    color: var(--text);
     transition: background .15s ease, border-color .15s ease, transform .08s ease;
 }
 
 .project-links a:hover {
-    background: color-mix(in oklab, var(--card), var(--accent) 7%);
-    border-color: color-mix(in oklab, var(--border), var(--accent) 28%);
+    background: color-mix(in oklab, var(--card), var(--accent) 8%);
+    border-color: color-mix(in oklab, var(--accent), var(--card) 20%);
     transform: translateY(-1px);
 }
 
-/* =========
-   Contact
-   ========= */
+/* ===== Featured: prima card in evidenza ===== */
+.projects .project.card:first-of-type {
+    position: relative;
+    border-left: 4px solid var(--accent);
+    padding-left: 16px;
+}
+
+.projects .project.card:first-of-type .project-info h3 {
+    font-size: 1.12rem;
+    /* leggermente più grande */
+}
+
+/* Badge “Nuovo” automatico sul primo titolo (non tocca l’HTML) */
+.projects .project.card:first-of-type .project-info h3::after {
+    content: "Nuovo";
+    margin-left: .6rem;
+    font-size: .72rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: color-mix(in oklab, var(--accent), var(--card) 85%);
+    border: 1px solid color-mix(in oklab, var(--accent), var(--card) 65%);
+    padding: .15rem .45rem;
+    border-radius: 999px;
+    vertical-align: middle;
+}
+
+/* ===== Contact ===== */
 .contact ul {
     list-style: none;
     padding: 0;
-    margin: 8px 0 0 0;
+    margin: 10px 0 0 0;
 }
 
 .contact li {
     margin: 6px 0;
-    color: var(--text);
 }
 
 .contact a {
@@ -226,18 +227,39 @@ header p {
     border-bottom-style: solid;
 }
 
-/* =========
-   Footer
-   ========= */
+/* ===== Footer ===== */
 footer {
     text-align: center;
     color: var(--muted);
     border-top: 1px solid var(--border);
 }
 
-/* =========
-   Motion preferences
-   ========= */
+/* ===== Stampa (per recruiter) ===== */
+@media print {
+    body {
+        background: #fff;
+        color: #000;
+    }
+
+    header,
+    footer {
+        border: 0;
+        padding: 0;
+    }
+
+    .project.card {
+        box-shadow: none !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .project-links a {
+        color: #000;
+        border: 1px solid #000;
+    }
+}
+
+/* ===== Motion prefs ===== */
 @media (prefers-reduced-motion: reduce) {
     * {
         transition: none !important;
