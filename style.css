@@ -11,8 +11,10 @@
     --text: #0f1222;
     --muted: #6b7280;
     --border: #e7e9f0;
-    --accent: #2563eb;
-    /* blu professionale */
+
+    --accent: #4d7c5b;
+        /* verde salvia */
+
     --shadow: 0 8px 24px rgba(15, 18, 34, .06);
 }
 
