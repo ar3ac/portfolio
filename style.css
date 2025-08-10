@@ -12,6 +12,9 @@
   /* --accent: #4d7c5b;    verde salvia */
   --accent: #3c3f46;  /* grigio bluastro */
   --shadow: 0 8px 24px rgba(15,18,34,.06);
+  --inset-top: max(14px, env(safe-area-inset-top));
+  --inset-right: max(14px, env(safe-area-inset-right));
+  --inset-bottom: max(14px, env(safe-area-inset-bottom));
 }
 /* ===== Palette scura attivata dal toggle ===== */
 :root[data-theme="dark"] {
@@ -24,22 +27,35 @@
 }
 
 /* ===== Pulsante toggle ===== */
+/* Toggle sempre cliccabile e comodo al tocco */
 .theme-toggle {
     position: fixed;
-    /* sempre visibile */
-    top: 14px;
-    right: 14px;
-    z-index: 1000;
+    top: var(--inset-top);
+    right: var(--inset-right);
+    z-index: 9999;
     border: 1px solid var(--border);
     background: var(--card);
     color: var(--text);
     border-radius: 999px;
-    padding: 8px 10px;
-    cursor: pointer;
-    box-shadow: var(--shadow);
+    padding: 10px 12px;
+    /* tap area più grande */
+    min-width: 44px;
+    min-height: 44px;
+    /* target consigliato mobile */
     line-height: 1;
-    font-size: 16px;
-    transition: transform .08s ease, box-shadow .18s ease, border-color .18s ease, background .18s ease;
+    font-size: 18px;
+    cursor: pointer;
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    box-shadow: var(--shadow);
+}
+
+/* Se preferisci in basso a destra su mobile (opzionale) */
+@media (max-width: 600px) {
+    .theme-toggle {
+        top: auto;
+        bottom: var(--inset-bottom);
+    }
 }
 
 .theme-toggle:hover {
