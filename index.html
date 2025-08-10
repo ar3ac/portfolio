@@ -123,23 +123,25 @@
     const btn = document.getElementById('theme-toggle');
 
     function setIcon(theme) {
-        // 🌙 per light (premi per scurire), ☀️ per dark (premi per schiarire)
         btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+        btn.setAttribute('aria-pressed', theme === 'dark' ? 'true' : 'false');
     }
 
     function apply(theme) {
         document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
+        try { localStorage.setItem('theme', theme); } catch (e) { /* Safari Private */ }
         setIcon(theme);
     }
 
-    // Setup iniziale icona
-    setIcon(document.documentElement.getAttribute('data-theme') || 'light');
+    // Stato iniziale
+    const current = document.documentElement.getAttribute('data-theme') || 'light';
+    setIcon(current);
 
+    // Evita doppio tap su mobile
     btn.addEventListener('click', () => {
-        const current = document.documentElement.getAttribute('data-theme') || 'light';
-        apply(current === 'dark' ? 'light' : 'dark');
-    });
+        const now = document.documentElement.getAttribute('data-theme') || 'light';
+        apply(now === 'dark' ? 'light' : 'dark');
+    }, { passive: true });
 </script>
 </body>
 
