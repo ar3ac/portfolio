@@ -9,7 +9,8 @@
   --text: #0f1222;
   --muted: #6b7280;
   --border: #e7e9f0;
-  --accent: #4d7c5b;    /* verde salvia */
+  /* --accent: #4d7c5b;    verde salvia */
+  --accent: #3c3f46;  /* grigio bluastro */
   --shadow: 0 8px 24px rgba(15,18,34,.06);
 }
 
