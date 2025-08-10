@@ -9,11 +9,22 @@
     <link rel="icon" href="assets/favicon.png" type="image/png">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<script>
+    // Evita flash del tema “sbagliato”
+    (() => {
+        const saved = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+    })();
+</script>
 
 </head>
 
 <body>
     <header>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Cambia tema" title="Cambia tema">🌙</button>
+
         <h1>Luca Marrazzo</h1>
         <h3>aka ar3ac</h3>
         <p>Junior Python Developer · Automazione · API · Backend</p>
@@ -108,6 +119,28 @@
     <footer>
         <p>© 2025 Luca Marrazzo</p>
     </footer>
+<script>
+    const btn = document.getElementById('theme-toggle');
+
+    function setIcon(theme) {
+        // 🌙 per light (premi per scurire), ☀️ per dark (premi per schiarire)
+        btn.textContent = theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function apply(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        setIcon(theme);
+    }
+
+    // Setup iniziale icona
+    setIcon(document.documentElement.getAttribute('data-theme') || 'light');
+
+    btn.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme') || 'light';
+        apply(current === 'dark' ? 'light' : 'dark');
+    });
+</script>
 </body>
 
 </html>
